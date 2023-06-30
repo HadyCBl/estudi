@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result_verificar->num_rows > 0) {
         // El correo o nombre ya están registrados
-        echo "El correo o nombre ya están registrados. Por favor, intenta con otro.";
+        header ("Location: error.php");
     } else {
         // Preparar la consulta SQL para insertar los datos en la tabla "cuenta"
         $sql_insertar = "INSERT INTO cuenta (nombre, apellido, correo, pass, cargo) VALUES ('$nombre', '$apellido', '$correo', '$contraseña', '$cargo')";
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->query($sql_insertar) === TRUE) {
             echo "Datos insertados correctamente";
         } else {
-            echo "Error al insertar datos: " . $conn->error;
+            header ("location: error2.html");
         }
     }
 

@@ -82,165 +82,121 @@
     </nav>
 
     <div class="main main-raised" id="id-about">
-        <div class="container">
+    <div class="container">
+        <div class="section text-center">
+            <div class="row"></div>
+
             <div class="section text-center">
-                <div class="row"></div>
+                <h2 class="title" data-aos="fade-up" data-aos-duration="1000">HISTORIAL DE CAMBIOS</h2>
 
-                <div class="section text-center">
-                    <h2 class="title" data-aos="fade-up" data-aos-duration="1000">VISUALIZA LOS REGISTROS</h2>
+              
 
-                    <form id="searchForm" method="GET">
-                        <div class="form-group">
-                            <label for="gradeSelect">Selecciona el grado:</label>
-                            <select class="form-control" id="gradeSelect" name="grado">
-                                <option value="">Selecciona un grado</option>
-                                <option value="primaria">Primaria</option>
-                                <option value="basico">Básico</option>
-                                <option value="criminologia">Criminología</option>
-                                <option value="computacion">Perio en Computación</option>
-                                <option value="turismo">Turismo</option>
-                                <option value="magisterio">Magisterio</option>
-                                <option value="administracion">Administracion de empresas</option>
-                                <option value="electronica">Electronica</option>
-                                <option value="mecanica">Mecanica</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="nivelSelect">Selecciona el nivel:</label>
-                            <select class="form-control" id="nivel_carrera" name="nivel_carrera">
-                                <option value="#">Todos los niveles</option>
-                                <option value="1">nivel 1</option>
-                                <option value="2">nivel 2</option>
-                                <option value="3">nivel 3</option>
-                                <option value="4">nivel 4</option>
-                                <option value="5">nivel 5</option>
-                                <option value="6">nivel 6</option>
-                            </select>
-                        </div>
+                <?php
+    // Establecer la conexión a la base de datos
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "estudi";
 
-                        <button type="submit" class="btn btn-primary">
-                            <i class="material-icons">send</i> 
-                        </button>
-                        
-                    </form>
-
-                    <?php
-// Obtener el grado seleccionado
-$grado = isset($_GET['grado']) ? $_GET['grado'] : "";
-
-// Obtener el nivel seleccionado
-$nivel = isset($_GET['nivel_carrera']) ? $_GET['nivel_carrera'] : "";
-
-// Establecer la conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "estudi";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("La conexión falló: " . $conn->connect_error);
-}
-
-// Preparar la consulta SQL para obtener los registros filtrados por grado y nivel
-$sql = "SELECT * FROM alumno WHERE 1=1";
-if (!empty($grado)) {
-    $sql .= " AND grado = '$grado'";
-}
-if (!empty($nivel)) {
-    $sql .= " AND nivel_carrera = '$nivel'";
-}
-$sql .= " ORDER BY grado";
-
-// Ejecutar la consulta
-$result = $conn->query($sql);
-
-// Verificar si se encontraron registros
-if ($result->num_rows > 0) {
-    // Construir la tabla HTML
-    echo '<table class="table">';
-    echo '<thead>';
-    echo '<tr>';
-    echo '<th>ID</th>';
-    echo '<th>Grado</th>';
-    echo '<th>Nombre</th>';
-    echo '<th>Segundo Nombre</th>';
-    echo '<th>Tercer Nombre</th>';
-    echo '<th>Apellido</th>';
-    echo '<th>Segundo Apellido</th>';
-    echo '<th>Fecha de Nacimiento</th>';
-    echo '<th>Dirección</th>';
-    echo '<th>Nivel</th>';
-    echo '</tr>';
-    echo '</thead>';
-    echo '<tbody>';
-
-    // Recorrer los resultados de la consulta
-    while ($row = $result->fetch_assoc()) {
-        $id = $row['id'];
-        $grado = $row['grado'];
-        $nombre = $row['nombre'];
-        $segundo_nombre = $row['segundo_nombre'];
-        $tercer_nombre = $row['tercer_nombre'];
-        $apellido = $row['apellido'];
-        $segundo_apellido = $row['segundo_apellido'];
-        $fecha_nacimiento = $row['fecha_nacimiento'];
-        $direccion = $row['direccion'];
-        $nivel_carrera = $row['nivel_carrera'];
-
-        // Agregar una fila para el registro actual 
-        echo '<tr>';
-        echo '<td>' . $id . '</td>';
-        echo '<td>' . $grado . '</td>';
-        echo '<td>' . $nombre . '</td>';
-        echo '<td>' . $segundo_nombre . '</td>';
-        echo '<td>' . $tercer_nombre . '</td>';
-        echo '<td>' . $apellido . '</td>';
-        echo '<td>' . $segundo_apellido . '</td>';
-        echo '<td>' . $fecha_nacimiento . '</td>';
-        echo '<td>' . $direccion . '</td>';
-        echo '<td>' . $nivel_carrera . '</td>';
-        echo '</tr>';
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("La conexión falló: " . $conn->connect_error);
     }
 
-    echo '</tbody>';
-    echo '</table>';
-} else {
-    echo "No se encontraron registros.";
-}
+    // Consulta SQL para obtener los registros de la tabla historial
+    $sql = "SELECT * FROM historial";
+    $result = $conn->query($sql);
 
-// Cerrar la conexión
-$conn->close();
+    if ($result->num_rows > 0) {
+        echo "<table>";
+        echo "<tr>";
+        echo "<th>ID</th>";
+        echo "<th>Nombre</th>";
+        echo "<th>Segundo Nombre</th>";
+        echo "<th>Tercer Nombre</th>";
+        echo "<th>Apellido</th>";
+        echo "<th>Segundo Apellido</th>";
+        echo "<th>Fecha de Nacimiento</th>";
+        echo "<th>Dirección</th>";
+        echo "<th>Grado</th>";
+        echo "<th>Nivel de Carrera</th>";
+        echo "<th>Cuenta</th>";
+        echo "<th>Usuario que elimino</th>";
+        echo "<th>Accion</th>";
+        echo "<th>Fecha de Eliminación</th>";
+
+        echo "</tr>";
+
+        while ($row = $result->fetch_assoc()) {
+            $cargo_query = "SELECT cargo FROM cuenta WHERE id = " . $row["id"];
+            $cargo_result = $conn->query($cargo_query);
+            
+            if ($cargo_result && $cargo_result->num_rows > 0) {
+                $cargo_row = $cargo_result->fetch_assoc();
+                $cargo = $cargo_row["cargo"];
+            } else {
+                
+            }
+
+            $nombre_query = "SELECT nombre FROM cuenta WHERE id = " . $row["id"];
+            $nombre_result = $conn->query($nombre_query);
+            
+            if ($nombre_result && $nombre_result->num_rows > 0) {
+                $nombre_row = $nombre_result->fetch_assoc();
+                $nombre = $nombre_row["nombre"];
+            } else {
+               
+            }
+            
+            echo "<tr>";
+            echo "<td>" . $row["id"] . "</td>";
+            echo "<td>" . $row["nombre_delete"] . "</td>";
+            echo "<td>" . $row["segundo_nombre_delete"] . "</td>";
+            echo "<td>" . $row["tercer_nombre_delete"] . "</td>";
+            echo "<td>" . $row["apellido_delete"] . "</td>";
+            echo "<td>" . $row["segundo_apellido_delete"] . "</td>";
+            echo "<td>" . $row["fecha_nacimiento_delete"] . "</td>";
+            echo "<td>" . $row["direccion_delete"] . "</td>";
+            echo "<td>" . $row["grado_delete"] . "</td>";   
+            echo "<td>" . $row["nivel_carrera_delete"] . "</td>";
+            echo "<td>" . $cargo . "</td>";
+            echo "<td>" . $nombre . "</td>";
+            echo "<th>Accion</th>";
+            echo "<td>" . $row["fecha_eliminacion"] . "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "No se encontraron registros.";
+    }
+
+    // Cerrar la conexión a la base de datos
+    $conn->close();
 ?>
 
 
-                </div>
             </div>
+
+            <script>
+                function changeGrade() {
+                    // Obtener el valor seleccionado del grado
+                    var selectedGrade = document.getElementById("gradeSelect").value;
+
+                    // Redirigir a la página con el grado seleccionado
+                    if (selectedGrade !== "") {
+                        window.location.href = "registros_table.php?grado=" + selectedGrade;
+                    } else {
+                        window.location.href = "registros_table.php";
+                    }
+                }
+            </script>
+
+
+            <!-- map -->
         </div>
-
-
-
     </div>
+</div>
 
-    <script>
-    function changeGrade() {
-        // Obtener el valor seleccionado del grado
-        var selectedGrade = document.getElementById("gradeSelect").value;
-
-        // Redirigir a la página con el grado seleccionado
-        if (selectedGrade !== "") {
-            window.location.href = "registros_table.php?grado=" + selectedGrade;
-        } else {
-            window.location.href = "registros_table.php";
-        }
-    }
-    </script>
-
-
-    <!-- map -->
-    </div>
-    </div>
-    </div>
 
     <div class="page-header header-filter" data-parallax="true"
         style="background-image: url('assets/img/bg-masthead1.jpg')">
@@ -301,11 +257,13 @@ $conn->close();
         // Redirigir al usuario a index.html
         window.location.href = "index.html";
     }
-    </script>
+</script>
 
 
     <script>
     AOS.init();
+
+    
     </script>
 
 </body>

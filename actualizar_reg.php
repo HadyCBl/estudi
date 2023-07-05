@@ -87,7 +87,9 @@
                 <div class="row"></div>
 
                 <div class="section text-center">
-                    <h2 class="title" data-aos="fade-up" data-aos-duration="1000">VISUALIZA LOS REGISTROS</h2>
+                    <h2 class="title" data-aos="fade-up" data-aos-duration="1000">ACTUALIZA/EDITA LOS REGISTROS </h2>
+                    <label for="gradeSelect">Recuerda que cada cambio se guardara en el Historial para mayor
+                        seguridad</label>
 
                     <form id="searchForm" method="GET">
                         <div class="form-group">
@@ -117,16 +119,15 @@
                                 <option value="6">nivel 6</option>
                             </select>
                         </div>
-
                         <button type="submit" class="btn btn-primary">
                             <i class="material-icons">send</i> 
                         </button>
-                        
+
                     </form>
 
                     <?php
 // Obtener el grado seleccionado
-$grado = isset($_GET['grado']) ? $_GET['grado'] : "";
+$grado = isset($_GET['grado']) ? $_GET['grado'] : "";   
 
 // Obtener el nivel seleccionado
 $nivel = isset($_GET['nivel_carrera']) ? $_GET['nivel_carrera'] : "";
@@ -171,6 +172,7 @@ if ($result->num_rows > 0) {
     echo '<th>Fecha de Nacimiento</th>';
     echo '<th>Dirección</th>';
     echo '<th>Nivel</th>';
+    echo '<th>Acciones</th>'; // Nueva columna de acciones
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
@@ -190,21 +192,25 @@ if ($result->num_rows > 0) {
 
         // Agregar una fila para el registro actual 
         echo '<tr>';
-        echo '<td>' . $id . '</td>';
-        echo '<td>' . $grado . '</td>';
-        echo '<td>' . $nombre . '</td>';
-        echo '<td>' . $segundo_nombre . '</td>';
-        echo '<td>' . $tercer_nombre . '</td>';
-        echo '<td>' . $apellido . '</td>';
-        echo '<td>' . $segundo_apellido . '</td>';
-        echo '<td>' . $fecha_nacimiento . '</td>';
-        echo '<td>' . $direccion . '</td>';
-        echo '<td>' . $nivel_carrera . '</td>';
-        echo '</tr>';
-    }
+                        echo '<td>' . $id . '</td>';
+                        echo '<td>' . $grado . '</td>';
+                        echo '<td>' . $nombre . '</td>';
+                        echo '<td>' . $segundo_nombre . '</td>';
+                        echo '<td>' . $tercer_nombre . '</td>';
+                        echo '<td>' . $apellido . '</td>';
+                        echo '<td>' . $segundo_apellido . '</td>';
+                        echo '<td>' . $fecha_nacimiento . '</td>';
+                        echo '<td>' . $direccion . '</td>';
+                        echo '<td>' . $nivel_carrera . '</td>';
+                        echo '<td>';
+                        echo '<a href="eliminar_registro.php?id=' . $id . '">Eliminar</a> | '; // Enlace para eliminar el registro
+                        echo '<a href="actualizar_registro.php?id=' . $id . '">Actualizar</a>'; // Enlace para actualizar el registro
+                        echo '</td>';
+                        echo '</tr>';
+                    }
 
-    echo '</tbody>';
-    echo '</table>';
+                    echo '</tbody>';
+                    echo '</table>';
 } else {
     echo "No se encontraron registros.";
 }

@@ -43,8 +43,9 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="#"
-                            data-original-title="English">🇺🇸 <b> Eng </b></a>
-                    </li>
+                            data-original-title="Cerrar sesión" onclick="cerrarSesion()">
+                            bai <b>Cerrar sesión</b>
+                        </a>
                     <li class="nav-item">
 
                         <a href="home.php" class="btn btn-primary">
@@ -59,8 +60,21 @@
                             Ver Registros
                         </a>
 
-
+                    <li class="nav-item">
+                        <a href="actualizar_reg.php" class="btn btn-primary">
+                            <i class="material-icons">spellcheck</i>
+                            editar Registros
+                        </a>
                     </li>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Historial_reg.php" class="btn btn-primary">
+                            <i class="material-icons">format_align_justify</i>
+                            Historial de cambios
+                        </a>
+                    </li>
+                    
+
                 </ul>
             </div>
         </div>
@@ -117,7 +131,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="direccion" class="bmd-label-floating">Dirección</label>
-                                    <input type="text" class="form-control" name="direccion" id="direccion" required>
+                                    <input type="text" class="form-control" name="direccion" id="direccion"
+                                        pattern="^[a-zA-Z0-9\s\-\.,#&amp;]+$" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -156,12 +171,11 @@
     <div class="page-header header-filter" data-parallax="true"
         style="background-image: url('assets/img/bg-masthead1.jpg')">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 animated fadeInDown delay-1s">
-                    <h4 id="welcome-message">bienvenido ...()</h4>
-                    <br>
-                </div>
-            </div>
+
+
+
+     
+
         </div>
     </div>
 
@@ -206,7 +220,16 @@
     <script src="assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
     <script>
     AOS.init();
+
+    function cerrarSesion() {
+        // Aquí debes incluir el código necesario para cerrar la sesión, como redireccionar a una página de inicio de sesión o eliminar las variables de sesión.
+
+        // Redirigir al usuario a index.html
+        window.location.href = "index.html";
+    }
     </script>
+
+
 
 </body>
 

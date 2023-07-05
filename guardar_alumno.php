@@ -18,13 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tercer_nombre = $_POST['tercer_nombre'];
     $apellido = $_POST['apellido'];
     $segundo_apellido = $_POST['segundo_apellido'];
-    $fecha_nacimiento = $_POST['fecha_nacimiento'];
+    $fecha_nacimiento= $_POST['fecha_nacimiento'];
     $direccion = $_POST['direccion'];
     $grado = $_POST['grado'];
     $nivel_carrera = $_POST['nivel_carrera'];
 
     // Verificar si ya existe un alumno con los mismos campos
-    $sql_verificar = "SELECT * FROM alumno WHERE nombre='$nombre' AND segundo_nombre='$segundo_nombre' AND tercer_nombre='$tercer_nombre' AND apellido='$apellido' AND segundo_apellido='$segundo_apellido' AND fecha_nacimiento='$fecha_nacimiento' AND direccion='$direccion' AND grado='$grado' AND nivel_carrera=$nivel_carrera";
+    $sql_verificar = "SELECT * FROM alumno WHERE nombre='$nombre' AND
+     segundo_nombre='$segundo_nombre' AND tercer_nombre='$tercer_nombre' AND apellido='$apellido' AND
+      segundo_apellido='$segundo_apellido' AND fecha_nacimiento='$fecha_nacimiento' AND direccion='$direccion' AND
+       grado='$grado' AND nivel_carrera=$nivel_carrera";
     $result_verificar = $conn->query($sql_verificar);
     if ($result_verificar->num_rows > 0) {
         // El alumno ya está registrado, muestra un mensaje de error

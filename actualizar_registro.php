@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "estudi";
+$username = "id20999683_harvey";
+$password = "Dannycbl200@";
+$dbname = "id20999683_estudi";
 
 // Verificar si se ha proporcionado el ID del registro a actualizar
 if (isset($_GET['id'])) {

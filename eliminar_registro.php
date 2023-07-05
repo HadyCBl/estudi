@@ -7,9 +7,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     // Realizar la conexión a la base de datos y ejecutar la consulta de eliminación
     $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "estudi";
+    $username = "id20999683_harvey";
+    $password = "Dannycbl200@";
+    $dbname = "id20999683_estudi";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {

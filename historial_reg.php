@@ -94,9 +94,9 @@
                 <?php
     // Establecer la conexión a la base de datos
     $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "estudi";
+    $username = "id20999683_harvey";
+    $password = "Dannycbl200@";
+    $dbname = "id20999683_estudi";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
